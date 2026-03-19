@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沖繩旅遊行程 5/22–5/26</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0a6e8a;
+    --deep: #05404f;
+    --sky: #c9e8f0;
+    --coral: #e8705a;
+    --sand: #f5ede0;
+    --foam: #f0f8fa;
+    --gold: #d4a843;
+    --text: #1a2d35;
+    --muted: #6b8a94;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--foam);
+    color: var(--text);
+    font-family: 'DM Sans', 'Noto Serif TC', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    background: linear-gradient(165deg, var(--deep) 0%, var(--ocean) 45%, #2ca8c2 70%, #7dd4e8 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Cellipse cx='400' cy='420' rx='500' ry='160' fill='%23f0f8fa' opacity='.18'/%3E%3Cellipse cx='400' cy='440' rx='420' ry='130' fill='%23f0f8fa' opacity='.12'/%3E%3C/svg%3E") bottom center / cover no-repeat;
+  }
+
+  /* Animated wave circles */
+  .wave-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    animation: expand 6s ease-out infinite;
+  }
+  .wave-ring:nth-child(1) { width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0s; }
+  .wave-ring:nth-child(2) { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 1.5s; }
+  .wave-ring:nth-child(3) { width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 3s; }
+  @keyframes expand {
+    0% { opacity: 0.6; transform: translate(-50%,-50%) scale(0.8); }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1.2); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; color: white;
+    padding: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase;
+    opacity: 0.7; margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .hero-subtitle {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    opacity: 0.85; margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .hero-dates {
+    display: inline-flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px; padding: 0.7rem 2rem;
+    font-size: 0.9rem; letter-spacing: 0.05em;
+  }
+
+  .hero-dates span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* INFO STRIP */
+  .info-strip {
+    background: var(--deep);
+    color: white;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+  }
+
+  .info-item {
+    padding: 1.8rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    animation: fadeIn 0.6s ease both;
+  }
+  .info-item:last-child { border-right: none; }
+  .info-label {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .info-value { font-size: 0.95rem; line-height: 1.5; opacity: 0.9; }
+  .info-value a { color: #7dd4e8; text-decoration: none; }
+  .info-value a:hover { text-decoration: underline; }
+
+  /* SECTIONS */
+  main { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+
+  /* ACCOMMODATION */
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ocean); font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--deep);
+  }
+  .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--sky), transparent); }
+
+  .hotel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+
+  .hotel-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(10,110,138,0.08);
+    border: 1px solid var(--sky);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .hotel-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,110,138,0.14); }
+
+  .hotel-header {
+    background: linear-gradient(135deg, var(--ocean), var(--deep));
+    color: white; padding: 1.4rem 1.6rem;
+  }
+  .hotel-dates { font-size: 0.72rem; letter-spacing: 0.2em; opacity: 0.75; margin-bottom: 0.3rem; }
+  .hotel-name { font-family: 'Noto Serif TC', serif; font-size: 1rem; font-weight: 600; line-height: 1.4; }
+
+  .hotel-body { padding: 1.4rem 1.6rem; }
+  .hotel-addr { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; display: flex; gap: 0.4rem; align-items: flex-start; }
+  .hotel-price { display: inline-block; background: var(--sand); border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--deep); font-weight: 500; }
+
+  /* ITINERARY */
+  .days-wrapper { display: flex; flex-direction: column; gap: 3rem; }
+
+  .day-block { position: relative; }
+
+  .day-header {
+    display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem;
+  }
+  .day-badge {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ocean), var(--deep));
+    color: white; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(10,110,138,0.25);
+  }
+  .day-badge-num { font-size: 1.4rem; font-family: 'Playfair Display', serif; line-height: 1; }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--deep);
+  }
+  .day-subtitle { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0.4rem; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--sky), transparent);
+  }
+
+  .event {
+    position: relative;
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem 1rem 1rem;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(201,232,240,0.6);
+    box-shadow: 0 2px 12px rgba(10,110,138,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .event:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(10,110,138,0.1); }
+
+  .event::before {
+    content: '';
+    position: absolute; left: -1.6rem; top: 1.1rem;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ocean);
+    box-shadow: 0 0 0 3px var(--sky);
+  }
+
+  .event-time {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--ocean); margin-bottom: 0.25rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .event-text { font-size: 0.9rem; line-height: 1.55; color: var(--text); }
+  .event-text em { color: var(--coral); font-style: normal; font-weight: 500; }
+
+  /* OPTIONS */
+  .options-block {
+    background: var(--sand);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    border-left: 3px solid var(--gold);
+  }
+  .options-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+
+  .option-card {
+    background: white; border-radius: 10px; padding: 1rem 1.2rem;
+    border: 1px solid rgba(212,168,67,0.2);
+  }
+  .option-num {
+    font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold);
+    margin-bottom: 0.4rem; text-transform: uppercase;
+  }
+  .option-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--deep); }
+  .option-items { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+  /* LOGISTICS */
+  .logistics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+  .logistics-card {
+    background: white; border-radius: 14px; padding: 1.5rem;
+    border: 1px solid var(--sky);
+    box-shadow: 0 2px 12px rgba(10,110,138,0.05);
+  }
+  .logistics-icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+  .logistics-title { font-weight: 600; font-size: 0.95rem; color: var(--deep); margin-bottom: 0.6rem; }
+  .logistics-content { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+  .logistics-content a { color: var(--ocean); text-decoration: none; }
+  .logistics-content a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); color: white; text-align: center;
+    padding: 2.5rem; font-size: 0.8rem; opacity: 0.8;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 600px) {
+    .info-strip { grid-template-columns: 1fr 1fr; }
+    .day-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── VOTE BLOCK ── */
+  .vote-block { margin-bottom: 1rem; }
+
+  .vote-name-bar {
+    display: flex; gap: 10px; align-items: center;
+    background: var(--sand); border-radius: 12px;
+    padding: 0.9rem 1.2rem; margin-bottom: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+  .vote-name-bar label { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+  .vote-name-bar input {
+    flex: 1; max-width: 200px; border: 1px solid var(--sky);
+    border-radius: 8px; padding: 0.45rem 0.75rem;
+    font-size: 0.9rem; font-family: inherit; background: white; color: var(--text);
+    outline: none;
+  }
+  .vote-name-bar input:focus { border-color: var(--ocean); box-shadow: 0 0 0 3px rgba(10,110,138,0.12); }
+  .vote-name-bar input.shake { animation: shake 0.35s ease; border-color: #e8705a; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)}
+  }
+  .vote-name-bar .btn-confirm {
+    padding: 0.45rem 1.1rem; border-radius: 8px; border: none;
+    background: var(--ocean); color: white; font-size: 0.85rem;
+    font-family: inherit; cursor: pointer; transition: background 0.2s;
+  }
+  .vote-name-bar .btn-confirm:hover { background: var(--deep); }
+
+  .vote-who {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--sand); border-radius: 12px;
+    padding: 0.8rem 1.2rem; margin-bottom: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+  .vote-who .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; flex-shrink: 0;
+  }
+  .vote-who .who-name { font-size: 0.9rem; color: var(--text); font-weight: 500; flex: 1; }
+  .vote-who .btn-change {
+    font-size: 0.78rem; padding: 0.3rem 0.8rem; border-radius: 6px;
+    border: 1px solid var(--sky); background: white; color: var(--muted);
+    cursor: pointer; font-family: inherit;
+  }
+  .vote-who .btn-change:hover { background: var(--sky); }
+
+  .vote-options-label {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .vote-options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+
+  .vote-card {
+    background: white; border-radius: 12px;
+    border: 2px solid transparent;
+    padding: 1rem 1.1rem; cursor: pointer;
+    transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+    box-shadow: 0 1px 6px rgba(10,110,138,0.06);
+    position: relative;
+  }
+  .vote-card:hover { border-color: var(--sky); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(10,110,138,0.1); }
+  .vote-card.voted-mine { border-color: var(--ocean); background: #f0fafc; }
+  .vote-card.voted-mine .vc-num { color: var(--ocean); }
+  .vote-card .vc-check {
+    position: absolute; top: 0.7rem; right: 0.8rem;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--ocean); display: none;
+    align-items: center; justify-content: center;
+  }
+  .vote-card.voted-mine .vc-check { display: flex; }
+  .vote-card .vc-check::after { content: '✓'; color: white; font-size: 11px; }
+  .vc-num { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 3px; }
+  .vc-title { font-size: 0.95rem; font-weight: 600; color: var(--deep); margin-bottom: 5px; }
+  .vc-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+  .vc-detail a { color: var(--ocean); }
+
+  .vote-results { margin-top: 0.5rem; }
+  .vote-result-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .vr-label { font-size: 0.78rem; color: var(--muted); min-width: 46px; }
+  .vr-bar-wrap { flex: 1; height: 7px; background: var(--sky); border-radius: 4px; overflow: hidden; }
+  .vr-bar { height: 100%; background: var(--ocean); border-radius: 4px; transition: width 0.4s ease; }
+  .vr-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .voter-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.75rem; padding: 3px 9px; border-radius: 20px;
+    background: var(--foam); border: 1px solid var(--sky); color: var(--text);
+  }
+  .voter-chip.mine { background: #dff0f7; border-color: var(--ocean); color: var(--deep); }
+  .voter-chip .chip-av {
+    width: 16px; height: 16px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 700; flex-shrink: 0;
+  }
+  .vote-hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; }
+
+  .vote-card.loading { opacity: 0.6; cursor: not-allowed; }
+  .spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid var(--sky); border-top-color: var(--ocean);
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wave-ring"></div>
+  <div class="wave-ring"></div>
+  <div class="wave-ring"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">✈ 台灣虎航 · 台中出發</p>
+    <h1 class="hero-title">沖繩</h1>
+    <p class="hero-subtitle">Okinawa · 五天四夜深度之旅</p>
+    <div class="hero-dates">
+      <span>📅 2026年 5月22日（五）</span>
+      <span>→</span>
+      <span>5月26日（二）</span>
+    </div>
+  </div>
+</header>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-label">去程航班</div>
+    <div class="info-value">5/22 台中 → 沖繩<br>07:10 – 09:40</div>
+  </div>
+  <div class="info-item">
+    <div class="info-label">回程航班</div>
+    <div class="info-value">5/26 沖繩 → 台中<br>19:00 – 19:30</div>
+  </div>
+  <div class="info-item">
+    <div class="info-label">租車</div>
+    <div class="info-value">OTS 沖繩店<br><a href="https://www.otsinternational.jp/otsrentacar/cn/" target="_blank">線上預先完成講解</a></div>
+  </div>
+  <div class="info-item">
+    <div class="info-label">電子簽證</div>
+    <div class="info-value"><a href="https://www.vjw.digital.go.jp/main/" target="_blank">vjw.digital.go.jp</a></div>
+  </div>
+  <div class="info-item">
+    <div class="info-label">駕照譯本</div>
+    <div class="info-value"><a href="https://www.gov.tw/News_Content_2_376856" target="_blank">gov.tw 申請連結</a></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ACCOMMODATION -->
+  <div class="section-header">
+    <span class="section-tag">住宿安排</span>
+    <h2 class="section-title">Hotels</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="hotel-grid">
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-dates">5月22日 — 5月24日（2晚）</div>
+        <div class="hotel-name">Hotel Palm Royal Resort Kokusai Street</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-addr">📍 3-9-10, Makishi, Naha City, Okinawa 900-0013</div>
+        <div class="hotel-price">💰 NT$35,476 總計・每房每晚約 NT$2,956</div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-dates">5月24日 — 5月26日（2晚）</div>
+        <div class="hotel-name">TWIN LINE HOTEL YANBARU（原 Okinawa Suncoast Hotel）</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-addr">📍 108 Koki, Nago, Okinawa 905-0025</div>
+        <div class="hotel-price">💰 NT$54,970 總計・單人 9,713・雙人 10,332・四人 14,562</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="days-wrapper">
+
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge">
+          <span>DAY</span>
+          <span class="day-badge-num">1</span>
+        </div>
+        <div>
+          <div class="day-title">5月22日（五）</div>
+          <div class="day-subtitle">抵達・南部巡遊</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-time">10:00</div><div class="event-text">搭手扶梯上4樓<em>國際航廈美食廣場</em>，購買知名飯糰</div></div>
+        <div class="event"><div class="event-time">11:30</div><div class="event-text"><em>OTS 沖繩店</em>取車</div></div>
+        <div class="event"><div class="event-time">12:30</div><div class="event-text"><em>Tamaya Toyosaki</em>（豬肉沖繩麵）｜先到的人記得取號</div></div>
+        <div class="event"><div class="event-time">14:00</div><div class="event-text"><em>玉泉洞・沖繩世界・毒蛇博物館</em><br>毒蛇表演 15:30 ／ 太鼓舞 16:00</div></div>
+        <div class="event"><div class="event-time">16:30</div><div class="event-text"><em>中本天婦羅店</em>（奥武島）</div></div>
+        <div class="event"><div class="event-time">18:00</div><div class="event-text">入住 Hotel Palm Royal Resort Kokusai Street</div></div>
+        <div class="event"><div class="event-time">18:30</div><div class="event-text"><em>國際通自由時間</em><br>屋台村・暖幕拉麵・Blue Seal・A&W 美式漢堡<br>🥩 燒肉五苑 Across Plaza 古島站前店（燒肉吃到飽）</div></div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge">
+          <span>DAY</span>
+          <span class="day-badge-num">2</span>
+        </div>
+        <div>
+          <div class="day-title">5月23日（六）</div>
+          <div class="day-subtitle">那霸市區・美國村</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-time">09:00</div><div class="event-text"><em>第一牧志公設市場</em><br>吃海鮮・步沙翁 2F 小甜點・大成屋伴手禮</div></div>
+        <div class="event"><div class="event-time">12:00</div><div class="event-text"><em>波上宮</em></div></div>
+        <div class="event"><div class="event-time">14:00</div><div class="event-text"><em>首里城</em> 或 <em>沖繩兒童王國</em></div></div>
+        <div class="event"><div class="event-time">17:00</div><div class="event-text"><em>美國村看夕陽・吃晚餐</em><br>Blue Seal 冰淇淋・グルメ迴轉壽司市場・Seaside Cafe Hanon（海景咖啡廳）<br>浜屋沖繩麵・BENSON'S 安格斯漢堡・琉球之牛（燒肉）<br>🍜 牛骨琉球拉麵（可用兌換券）</div></div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge">
+          <span>DAY</span>
+          <span class="day-badge-num">3</span>
+        </div>
+        <div>
+          <div class="day-title">5月24日（日）</div>
+          <div class="day-subtitle">美麗海・古宇利島・換飯店</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event"><div class="event-time">08:00</div><div class="event-text"><em>McDonald's Ameku Ryubo Rakuichi</em>（鬆餅漢堡）外帶</div></div>
+        <div class="event"><div class="event-time">10:00</div><div class="event-text"><em>美麗海水族館</em><br>🐬 海豚表演 10:30 ／ 11:30 ／ 13:00<br>備瀨崎海灘自由浮潛</div></div>
+        <div class="event"><div class="event-time">14:00</div><div class="event-text"><em>古宇利島</em>｜粉紅巴士蝦蝦飯 或 海膽飯<br>古宇利海灘・休息站（古宇利交流廣場）・Oppa Ice Cream 牛奶冰</div></div>
+        <div class="event"><div class="event-time">15:00</div><div class="event-text"><em>古宇利塔</em></div></div>
+        <div class="event"><div class="event-time">16:30</div><div class="event-text">入住 TWIN LINE HOTEL YANBARU<br>自由活動：海邊沙灘・飯店泳池・桑拿房</div></div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge">
+          <span>DAY</span>
+          <span class="day-badge-num">4</span>
+        </div>
+        <div>
+          <div class="day-title">5月25日（一）</div>
+          <div class="day-subtitle">三選一自由活動日</div>
+        </div>
+      </div>
+      <div class="vote-block" id="vote-d4"></div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge">
+          <span>DAY</span>
+          <span class="day-badge-num">5</span>
+        </div>
+        <div>
+          <div class="day-title">5月26日（二）</div>
+          <div class="day-subtitle">返程日・最後巡遊</div>
+        </div>
+      </div>
+      <div class="vote-block" id="vote-d5"></div>
+      <div class="timeline">
+        <div class="event"><div class="event-time">15:00</div><div class="event-text"><em>瀨長島海風露台</em></div></div>
+        <div class="event"><div class="event-time">16:30</div><div class="event-text"><em>OTS 還車</em></div></div>
+        <div class="event"><div class="event-time">17:00</div><div class="event-text">抵達機場</div></div>
+        <div class="event"><div class="event-time">19:00</div><div class="event-text">✈ 飛機起飛｜沖繩 → 台中（19:00 – 19:30）</div></div>
+      </div>
+    </div>
+
+  </div><!-- end days-wrapper -->
+
+  <!-- LOGISTICS -->
+  <div class="section-header" style="margin-top: 4rem;">
+    <span class="section-tag">行前準備</span>
+    <h2 class="section-title">Checklist</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="logistics-grid">
+    <div class="logistics-card">
+      <div class="logistics-icon">✈️</div>
+      <div class="logistics-title">機票（台灣虎航）</div>
+      <div class="logistics-content">
+        去程：5/22 台中 07:10 → 沖繩 09:40<br>
+        回程：5/26 沖繩 19:00 → 台中 19:30
+      </div>
+    </div>
+    <div class="logistics-card">
+      <div class="logistics-icon">🪪</div>
+      <div class="logistics-title">電子簽證（VJW）</div>
+      <div class="logistics-content">
+        <a href="https://www.vjw.digital.go.jp/main/" target="_blank">vjw.digital.go.jp</a><br>
+        帳號：<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58d8d8d8d8dd3d3d3d3d3d0d2a58288848c89cb868a88">[email&#160;protected]</a><br>
+        密碼：James-0722
+      </div>
+    </div>
+    <div class="logistics-card">
+      <div class="logistics-icon">🚗</div>
+      <div class="logistics-title">OTS 租車</div>
+      <div class="logistics-content">
+        <a href="https://www.otsinternational.jp/otsrentacar/cn/" target="_blank">線上事前完成講解</a><br>
+        可節省現場等候 15 分鐘
+      </div>
+    </div>
+    <div class="logistics-card">
+      <div class="logistics-icon">📋</div>
+      <div class="logistics-title">駕照日文譯本</div>
+      <div class="logistics-content">
+        <a href="https://www.gov.tw/News_Content_2_376856" target="_blank">gov.tw 申請頁面</a><br>
+        請提前辦理
+      </div>
+    </div>
+    <div class="logistics-card">
+      <div class="logistics-icon">📁</div>
+      <div class="logistics-title">內部行程表格</div>
+      <div class="logistics-content">
+        <a href="https://1drv.ms/f/c/86bf9c1818b02856/IgD1m1UeIuIyS4EqkH7fmsCSAfO0H24Yi2LMYAUqWMAXo5E?e=wdqeim" target="_blank">OneDrive 共用連結 →</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  🌊 沖繩旅遊行程 2026 · 5/22 – 5/26 &nbsp;|&nbsp; 祝旅途愉快，一路平安 ✈
+</footer>
+
+<script>
+(function() {
+  // ════════════════════════════════════════════════
+  //  ★ 步驟三：把你的 Apps Script Web App 網址貼在這裡
+  // ════════════════════════════════════════════════
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxcCbbnp6w32Z_j-y8K3IrSBYTzZUtJiNKotM2lvgK1NKBMQnZHHoffeRStrgLrOs_hUg/exec';
+
+  const DAYS = {
+    d4: {
+      label: '🗓 第四天方案投票（5/25）',
+      options: [
+        { id:'A', num:'方案 A', title:'🤿 青洞潛水浮潛',
+          detail:'07:30 / 09:30 / 11:30 出發<br>深潛或浮潛皆可選擇<br><a href="https://heichaodive.com/diving/" target="_blank" style="color:var(--ocean)">預約連結 →</a>' },
+        { id:'B', num:'方案 B', title:'🎢 Junglia 樂園',
+          detail:'10:00 入園・整天暢玩<br>1日門票＋免費貴賓室<br>＋豪華通行證 DINOSAUR SAFARI<br>NT$1,772 / 人' },
+        { id:'C', num:'方案 C', title:'🍍 北部漫遊',
+          detail:'10:00 Nago Pineapple Park<br>12:00 HAMA 濱壽司 / Kura Sushi<br>14:00 部瀬名海中公園（觀測塔・玻璃船）<br>15:00 Orion 啤酒廠<br>16:00 瀨底島（海灘・fuu cafe・浮潛）' }
+      ]
+    },
+    d5: {
+      label: '🗓 第五天晨間活動投票（5/26）',
+      options: [
+        { id:'A', num:'方案 A', title:'🤿 青洞浮潛', detail:'09:00 出發' },
+        { id:'B', num:'方案 B', title:'🛍 市區採購',
+          detail:'10:00 離開飯店<br>11:00 萬座毛<br>12:30 永旺夢樂城（寶可夢中心・購物）<br>或 DMM 水族館' }
+      ]
+    }
+  };
+
+  const NAME_KEY = 'okinawa_voter_name';
+
+  const PALETTES = [
+    ['#b5d4f4','#0c447c'],['#9fe1cb','#085041'],['#f5c4b3','#712b13'],
+    ['#c0dd97','#27500a'],['#fac775','#633806'],['#f4c0d1','#72243e'],
+    ['#cecbf6','#3c3489'],['#d3d1c7','#444441'],['#fce8d5','#8a3d15'],
+  ];
+  function palette(name) {
+    let h = 0;
+    for (const c of name) h = (h * 31 + c.charCodeAt(0)) % PALETTES.length;
+    return PALETTES[Math.abs(h)];
+  }
+  function initials(n) { return n.trim().slice(0,2).toUpperCase(); }
+  function chipAvatar(name, size) {
+    const [bg,fg] = palette(name);
+    return `<span class="chip-av" style="background:${bg};color:${fg};width:${size}px;height:${size}px;">${initials(name)}</span>`;
+  }
+
+  // ── 名字存在 localStorage（只是記住你是誰，票存雲端）──
+  function loadName() { try { return localStorage.getItem(NAME_KEY) || ''; } catch(e) { return ''; } }
+  function saveName(n){ try { localStorage.setItem(NAME_KEY, n); } catch(e){} }
+
+  // ── 雲端票數快取（避免每次都重新請求）──
+  let votes  = { d4: {A:[],B:[],C:[]}, d5: {A:[],B:[]} };
+  let myName = loadName();
+  let loading = false;
+
+  // ── API 呼叫 ──────────────────────────────────────────────────
+  async function apiPost(payload) {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+    return res.json();
+  }
+
+  async function fetchVotes() {
+    try {
+      const data = await apiPost({ action: 'getVotes' });
+      if (!data.error) {
+        // 補齊所有選項，避免 undefined
+        ['d4','d5'].forEach(day => {
+          if (!data[day]) data[day] = {};
+          DAYS[day].options.forEach(o => {
+            if (!Array.isArray(data[day][o.id])) data[day][o.id] = [];
+          });
+        });
+        votes = data;
+      }
+    } catch(e) { /* 網路失敗時沿用快取 */ }
+  }
+
+  async function submitVote(dayId, optId) {
+    // 樂觀更新：先在本地反映，再發送
+    const oldVotes = JSON.parse(JSON.stringify(votes));
+    Object.keys(votes[dayId]).forEach(k => {
+      votes[dayId][k] = votes[dayId][k].filter(n => n !== myName);
+    });
+    if (!votes[dayId][optId]) votes[dayId][optId] = [];
+    votes[dayId][optId].push(myName);
+    renderAll();
+
+    try {
+      await apiPost({ action: 'vote', name: myName, day: dayId, option: optId });
+      await fetchVotes(); // 拿最新結果
+      renderAll();
+    } catch(e) {
+      votes = oldVotes; // 失敗則回滾
+      renderAll();
+      alert('投票失敗，請確認網路連線後重試。');
+    }
+  }
+
+  function getMyVote(dayId) {
+    for (const [optId, voters] of Object.entries(votes[dayId] || {})) {
+      if (voters.includes(myName)) return optId;
+    }
+    return null;
+  }
+
+  function renderAll() {
+    Object.keys(DAYS).forEach(dayId => renderDay(dayId));
+  }
+
+  function renderDay(dayId) {
+    const el = document.getElementById('vote-' + dayId);
+    if (!el) return;
+    const day    = DAYS[dayId];
+    const myVote = getMyVote(dayId);
+    const allVoters = Object.values(votes[dayId] || {}).flat();
+    const total  = allVoters.length;
+    const maxCnt = Math.max(1, ...day.options.map(o => (votes[dayId]?.[o.id] || []).length));
+
+    let html = '';
+
+    if (!myName) {
+      html += `<div class="vote-name-bar">
+        <label>你的名字</label>
+        <input type="text" id="ni-${dayId}" placeholder="輸入姓名後投票…" maxlength="20">
+        <button class="btn-confirm" data-day="${dayId}">確認</button>
+      </div>`;
+    } else {
+      const [bg,fg] = palette(myName);
+      html += `<div class="vote-who">
+        <span class="avatar" style="background:${bg};color:${fg};">${initials(myName)}</span>
+        <span class="who-name">嗨，${myName}！點選你的方案</span>
+        <button class="btn-change">更換姓名</button>
+      </div>`;
+    }
+
+    html += `<div class="vote-options-label">${day.label}</div>`;
+    html += `<div class="vote-options-grid">`;
+    day.options.forEach(opt => {
+      const isMine = myVote === opt.id;
+      html += `<div class="vote-card${isMine?' voted-mine':''}${loading?' loading':''}" data-day="${dayId}" data-opt="${opt.id}">
+        <div class="vc-check"></div>
+        <div class="vc-num">${opt.num}</div>
+        <div class="vc-title">${opt.title}</div>
+        <div class="vc-detail">${opt.detail}</div>
+      </div>`;
+    });
+    html += `</div>`;
+
+    if (loading) {
+      html += `<p class="vote-hint" style="display:flex;align-items:center;gap:6px;"><span class="spinner"></span> 同步中…</p>`;
+    } else if (total > 0) {
+      html += `<div class="vote-results">`;
+      day.options.forEach(opt => {
+        const voters = votes[dayId]?.[opt.id] || [];
+        if (!voters.length) return;
+        const pct = Math.round((voters.length / maxCnt) * 100);
+        const chips = voters.map(v =>
+          `<span class="voter-chip${v===myName?' mine':''}">${chipAvatar(v,16)}${v}</span>`
+        ).join('');
+        html += `<div class="vote-result-row">
+          <span class="vr-label">${opt.num}</span>
+          <div class="vr-bar-wrap"><div class="vr-bar" style="width:${pct}%"></div></div>
+          <div class="vr-chips">${chips}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    } else if (!myName) {
+      html += `<p class="vote-hint">還沒有人投票，成為第一個吧！</p>`;
+    }
+
+    el.innerHTML = html;
+
+    const confirmBtn = el.querySelector('.btn-confirm');
+    if (confirmBtn) {
+      const input = el.querySelector(`#ni-${dayId}`);
+      const doConfirm = () => {
+        const n = input.value.trim();
+        if (!n) {
+          input.classList.add('shake');
+          setTimeout(() => input.classList.remove('shake'), 400);
+          input.focus(); return;
+        }
+        myName = n; saveName(n); renderAll();
+      };
+      confirmBtn.addEventListener('click', doConfirm);
+      input.addEventListener('keydown', e => { if (e.key==='Enter') doConfirm(); });
+    }
+
+    const changeBtn = el.querySelector('.btn-change');
+    if (changeBtn) {
+      changeBtn.addEventListener('click', () => { myName=''; saveName(''); renderAll(); });
+    }
+
+    el.querySelectorAll('.vote-card').forEach(card => {
+      card.addEventListener('click', () => {
+        if (!myName) {
+          document.querySelectorAll('.vote-name-bar input').forEach(inp => {
+            inp.classList.add('shake');
+            setTimeout(() => inp.classList.remove('shake'), 400);
+            inp.focus();
+          }); return;
+        }
+        if (loading) return;
+        loading = true; renderAll();
+        submitVote(card.dataset.day, card.dataset.opt).finally(() => {
+          loading = false; renderAll();
+        });
+      });
+    });
+  }
+
+  // ── 啟動：載入票數後渲染 ──────────────────────────────────────
+  async function init() {
+    renderAll(); // 先顯示骨架
+    loading = true; renderAll();
+    await fetchVotes();
+    loading = false; renderAll();
+    // 每 30 秒自動刷新
+    setInterval(async () => {
+      await fetchVotes();
+      renderAll();
+    }, 30000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>
