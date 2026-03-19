@@ -377,7 +377,7 @@
   }
   .vote-hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; }
 
-  .vote-card.loading { opacity: 0.6; cursor: not-allowed; }
+  .vote-card.loading.voted-mine { opacity: 0.55; cursor: not-allowed; }
   .spinner {
     display: inline-block; width: 14px; height: 14px;
     border: 2px solid var(--sky); border-top-color: var(--ocean);
@@ -701,6 +701,23 @@
     } catch(e) { /* 網路失敗時沿用快取 */ }
   }
 
+  async function cancelVote(dayId) {
+    const oldVotes = JSON.parse(JSON.stringify(votes));
+    Object.keys(votes[dayId]).forEach(k => {
+      votes[dayId][k] = votes[dayId][k].filter(n => n !== myName);
+    });
+    renderAll();
+    try {
+      await apiPost({ action: 'clearName', name: myName });
+      await fetchVotes();
+      renderAll();
+    } catch(e) {
+      votes = oldVotes;
+      renderAll();
+      alert('操作失敗，請確認網路連線後重試。');
+    }
+  }
+
   async function submitVote(dayId, optId) {
     // 樂觀更新：先在本地反映，再發送
     const oldVotes = JSON.parse(JSON.stringify(votes));
@@ -826,7 +843,15 @@
             inp.focus();
           }); return;
         }
-        if (loading) return;
+        // 已經是自己投的那張，且正在 loading 中才擋掉（避免重複送出）
+        const isMyCurrentVote = getMyVote(card.dataset.day) === card.dataset.opt;
+        if (loading && isMyCurrentVote) return;
+        // 點同一個選項等於取消（再點一次取消自己的票）
+        if (isMyCurrentVote && !loading) {
+          loading = true; renderAll();
+          cancelVote(card.dataset.day).finally(() => { loading = false; renderAll(); });
+          return;
+        }
         loading = true; renderAll();
         submitVote(card.dataset.day, card.dataset.opt).finally(() => {
           loading = false; renderAll();
